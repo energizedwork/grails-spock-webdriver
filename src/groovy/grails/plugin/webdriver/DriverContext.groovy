@@ -5,12 +5,22 @@ import grails.util.GrailsUtil
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 import grails.util.BuildSettingsHolder
+import groovy.transform.Synchronized
 
 class DriverContext implements GrailsBuildListener {
 
-	static WebDriver driver
-	@Lazy private static ConfigObject config = {
-		def baseDir = BuildSettingsHolder.settings.getBaseDir()
+	private static WebDriver driver
+
+	@Synchronized
+	static WebDriver getDriver() {
+		if (!driver) {
+			driver = driverType.newInstance()
+		}
+		driver
+	}
+
+	@Lazy static ConfigObject config = {
+		def baseDir = BuildSettingsHolder.settings?.baseDir ?: new File(".")
 		def configFile = new File(baseDir, "grails-app/conf/WebDriverConfig.groovy")
 		if (configFile.isFile()) {
 			println "parsing config from $configFile.absolutePath..."
@@ -29,7 +39,7 @@ class DriverContext implements GrailsBuildListener {
 		}
 	}
 
-	Class<? extends WebDriver> getDriverType() {
+	private static Class<? extends WebDriver> getDriverType() {
 		def driverClassName = config?.webdriver?.driver
 		driverClassName ? Class.forName(driverClassName) : FirefoxDriver
 	}
