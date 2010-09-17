@@ -21,7 +21,6 @@ class DriverContext implements GrailsBuildListener {
 	void receiveGrailsBuildEvent(String name, Object... args) {
 		if (name == "TestPhaseStart" && args[0] == "functional") {
 			closeAfterTest = false
-			driver = driverType.newInstance()
 		} else if (name == "TestPhaseEnd" && args[0] == "functional") {
 			driver?.close()
 		}
