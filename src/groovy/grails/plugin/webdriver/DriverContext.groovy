@@ -19,9 +19,12 @@ class DriverContext implements GrailsBuildListener {
 	}
 
 	void receiveGrailsBuildEvent(String name, Object... args) {
-		if (name == "TestPhaseStart" && args[0] == "functional") {
+		def phases = config.webdriver.test.phases ?: ['functional']
+		if(!(args[0] in phases)) return
+		
+		if (name == "TestPhaseStart") {
 			closeAfterTest = false
-		} else if (name == "TestPhaseEnd" && args[0] == "functional") {
+		} else if (name == "TestPhaseEnd") {
 			driver?.close()
 		}
 	}
