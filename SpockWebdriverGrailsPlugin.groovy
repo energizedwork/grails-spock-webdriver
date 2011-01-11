@@ -1,7 +1,7 @@
 class SpockWebdriverGrailsPlugin {
 
 	def groupId = "com.energizedwork"
-    def version = "1.0.2-SNAPSHOT"
+    def version = "1.0.3-SNAPSHOT"
     def grailsVersion = "1.2.0 > *"
     def dependsOn = [:]
     def pluginExcludes = [
