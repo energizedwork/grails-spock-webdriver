@@ -12,13 +12,13 @@ grails.project.dependency.resolution = {
         mavenCentral()
     }
     dependencies {
-        compile("org.seleniumhq.selenium:selenium-firefox-driver:2.0b1")
-        test("org.seleniumhq.selenium:selenium-chrome-driver:2.0b1")
-        test("org.seleniumhq.selenium:selenium-ie-driver:2.0b1")
-        test("org.seleniumhq.selenium:selenium-htmlunit-driver:2.0b1") {
+        compile("org.seleniumhq.selenium:selenium-firefox-driver:2.7.0")
+        test("org.seleniumhq.selenium:selenium-chrome-driver:2.7.0")
+        test("org.seleniumhq.selenium:selenium-ie-driver:2.7.0")
+        test("org.seleniumhq.selenium:selenium-htmlunit-driver:2.7.0") {
             excludes "xml-apis"
         }
-        compile("org.seleniumhq.selenium:selenium-support:2.0b1") {
+        compile("org.seleniumhq.selenium:selenium-support:2.7.0") {
             excludes "junit", "hamcrest-all"
         }
     }
